@@ -7,31 +7,45 @@ public class Exercise3
 
   public static void main(String[] args)
   {
-    /*
-     * Create an ArrayList of names
-     */
-    ArrayList<String> names=new ArrayList<String>();
-    names.add("Sparky");
-    names.add("Nino");
-    names.add("Djamari");
-    names.add("Eireen");
-    names.add("Joan");
-    names.add("Haye");
-    /*
-     * Print them (unsorted)
-     */
-    System.out.println("Ongesorteerd: "+names);
-    /*
-     * Sort them
-     */
-    selectionSort(names);
-    /*
-     * Print them (sorted)
-     */
-    System.out.println("Gesorteerd: "+names);
+//    /*
+//     * Create an ArrayList of names
+//     */
+//    ArrayList<String> names=new ArrayList<String>();
+//    names.add("Sparky");
+//    names.add("Nino");
+//    names.add("Djamari");
+//    names.add("Eireen");
+//    names.add("Joan");
+//    names.add("Haye");
+//    /*
+//     * Print them (unsorted)
+//     */
+//    System.out.println("Ongesorteerd: "+names);
+//    /*
+//     * Sort them
+//     */
+//    selectionSort(names);
+//    /*
+//     * Print them (sorted)
+//     */
+//    System.out.println("Gesorteerd: "+names);
+	  printFibs(1000);
   }
 
-  /**
+  /*
+   * Prints the first 42 (43) numbers of the fibonacci sequence very quickly, but slows down significantly after that.
+   */
+  private static void printFibs(int times)
+  {
+	  assert times>0: "Please choose a positive number of times to print fibonacci numbers.";
+	  
+	  for(int i=0; i<times; i++)
+	  {
+		  System.out.println("n" + i + "=" + fib(i));
+	  }
+  }
+
+/**
    * Sorts an array insitu in ascending order using selection sort
    * @param array
    * @oaram length
@@ -77,4 +91,12 @@ public class Exercise3
     array.set(i,array.get(j));
     array.set(j,help);
   }
+  
+  static int fib ( int n )
+  {
+	  if ( n == 0 || n == 1 )
+		  return 1 ;
+		  else
+		  return fib (n-1) + fib (n-2);
+  } 
 }
