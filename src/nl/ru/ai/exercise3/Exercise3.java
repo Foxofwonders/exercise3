@@ -35,28 +35,28 @@ public class Exercise3
 //     * Print them (sorted)
 //     */
 //    System.out.println("Sorted: "+names);
-    printFibs(45);
+    printFibs3(45);
   }
   
   static int fib (int n, int[]memo)
   {
 	  if ( n == 0 || n == 1 )
 		  return 1 ;
+	  
+	  
+	  
+	  if(memo[n-1]!=0 && memo[n-2]!=0)
+	  {
+		  return memo[n-1] + memo[n-2];
+	  }
+	  else if(memo[n-2]!=0)
+	  {
+		  memo[n-1]=memo[n-2]+memo[n-3];
+		  return fib (n-1, memo) + fib (n-2, memo);
+	  }
 	  else
 	  {
-		  if(memo[n-1]!=0 && memo[n-2]!=0)
-		  {
-			  return memo[n-1] + memo[n-2];
-		  }
-		  else if(memo[n-2]!=0)
-		  {
-			  memo[n-1]=memo[n-2]+memo[n-3];
-			  return fib (n-1, memo) + fib (n-2, memo);
-		  }
-		  else
-		  {
-			  return fib (n-1, memo) + fib (n-2, memo);
-		  }
+		  return fib (n-1, memo) + fib (n-2, memo);
 	  }
 	  
   } 
@@ -75,6 +75,53 @@ public class Exercise3
 	  for(int i=0; i<=times; i++)
 	  {
 		  System.out.println("n " + i + "=" + fib(i, memo));
+	  }
+  }
+  
+  static int fib3 (int n, int[]memo)
+  {
+	  if ( n == 0 || n == 1 )
+		  return 1 ;
+	  
+	  
+	  
+	  if(memo[3]!=0 && memo[4]!=0)
+	  {
+		  return memo[4] + memo[3];
+	  }
+	  else if(memo[3]!=0)
+	  {
+		  memo[4]=memo[3]+memo[2];
+		  
+		  int help1 = memo[3];
+		  int help2 = memo[4];
+		  
+		  memo[2]= help1;
+		  memo[3]= help2;
+		  memo[4]= 0;
+		  return fib (n-1, memo) + fib (n-2, memo);
+	  }
+	  else
+	  {
+		  return fib (n-1, memo) + fib (n-2, memo);
+	  }
+	  
+  } 
+
+  /*
+   * Prints the first 42 (43) numbers of the fibonacci sequence very quickly, but slows down significantly after that.
+   */
+  private static void printFibs3(int times)
+  {
+	  assert times>0: "Please choose a positive number of times to print fibonacci numbers.";
+	  
+	  int[] memo = new int [5];
+	  memo[0]=1;
+	  memo[1]=1;
+		  
+	  for(int i=0; i<=times; i++)
+	  {
+		  System.out.println("n " + i + "=" + fib3(i, memo));
 	  }
   }
 
