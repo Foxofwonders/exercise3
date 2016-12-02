@@ -2,34 +2,39 @@ package nl.ru.ai.exercise3;
 
 import java.util.ArrayList;
 
+/**
+ * @author Denise van Baalen (s4708237)
+ * @author Anna Gansen (s4753755)
+ */
+
 public class Exercise3
 {
 
   public static void main(String[] args)
   {
-//    /*
-//     * Create an ArrayList of names
-//     */
-//    ArrayList<String> names=new ArrayList<String>();
-//    names.add("Sparky");
-//    names.add("Nino");
-//    names.add("Djamari");
-//    names.add("Eireen");
-//    names.add("Joan");
-//    names.add("Haye");
-//    /*
-//     * Print them (unsorted)
-//     */
-//    System.out.println("Ongesorteerd: "+names);
-//    /*
-//     * Sort them
-//     */
-//    selectionSort(names);
-//    /*
-//     * Print them (sorted)
-//     */
-//    System.out.println("Gesorteerd: "+names);
-	  printFibs(1000);
+    /*
+     * Create an ArrayList of names
+     */
+    ArrayList<String> names=new ArrayList<String>();
+    names.add("Sparky");
+    names.add("Nino");
+    names.add("Djamari");
+    names.add("Eireen");
+    names.add("Joan");
+    names.add("Haye");
+    names.add("Haye");
+    /*
+     * Print them (unsorted)
+     */
+    System.out.println("Unsorted: "+names);
+    /*
+     * Sort them
+     */
+    selectionSort(names,0);
+    /*
+     * Print them (sorted)
+     */
+    System.out.println("Sorted: "+names);
   }
 
   /*
@@ -49,47 +54,60 @@ public class Exercise3
    * Sorts an array insitu in ascending order using selection sort
    * @param array
    * @oaram length
+  /**
+   * Sorts an ArrayList insitu in ascending order using selection sort
+   * @param arraylist
+   * @oaram sorted elements
    */
-  static <T extends Comparable<T>> void selectionSort(ArrayList<T> array)
+  static <T extends Comparable<T>> void selectionSort(ArrayList<T> arraylist, int sorted)
   {
-    assert array!=null : "array should be initialized";
-    for(int i=0;i<array.size();i++)
-    {
-      int j=indexOfSmallestValue(array,new Slice(i,array.size()));
-      swap(array,i,j);
-    }
+	  assert arraylist!=null : "array should be initialized";
+	  if(sorted==arraylist.size())
+		  return;
+	  else
+	  {
+		  swap(arraylist,sorted,indexOfSmallestValue(arraylist,new Slice(sorted,arraylist.size())));
+		  selectionSort(arraylist,sorted+1);
+	  }
   }
   /**
-   * Finds index of smallest value in array slice
-   * @param array
+   * Finds index of smallest value in ArrayList slice
+   * @param arraylist
    * @param slice
    * @return index of smallest value
    */
-  static <T extends Comparable<T>> int indexOfSmallestValue(ArrayList<T> array, Slice slice)
+  static <T extends Comparable<T>> int indexOfSmallestValue(ArrayList<T> arraylist, Slice slice)
   {
-    assert array!=null : "Array should be initialized";
-    assert slice.isValid()&&slice.upto<=array.size() : "Slice should be valid";
+    assert arraylist!=null : "Array should be initialized";
+    assert slice.isValid()&&slice.upto<=arraylist.size() : "Slice should be valid";
     assert slice.upto-slice.from>0 : "Slice should be non-empty";
+    
     int index=slice.from;
-    for(int i=slice.from+1;i<slice.upto;i++)
-      if(array.get(i).compareTo(array.get(index))<0)
-        index=i;
-    return index;
+    int i=slice.from;
+    if(i==slice.upto-1)
+    	return index;
+    else
+    {
+      if(arraylist.get(i).compareTo(arraylist.get(indexOfSmallestValue(arraylist,new Slice(i+1,arraylist.size()))))<0)
+        return i;
+    }
+    return indexOfSmallestValue(arraylist,new Slice(i+1,arraylist.size()));
+    
   }
   /**
-   * Swap two elements in an array
-   * @param array
+   * Swap two elements in an ArrayList
+   * @param arraylist
    * @param i
    * @param j
    */
-  private static <T extends Comparable<T>> void swap(ArrayList<T> array, int i, int j)
+  private static <T extends Comparable<T>> void swap(ArrayList<T> arraylist, int i, int j)
   {
-    assert array!=null : "Array should be initialized";
-    assert i>=0&&i<array.size() : "First index is invalid";
-    assert j>=0&&j<array.size() : "Second index is invalid";
-    T help=array.get(i);
-    array.set(i,array.get(j));
-    array.set(j,help);
+    assert arraylist!=null : "Array should be initialized";
+    assert i>=0&&i<arraylist.size() : "First index is invalid";
+    assert j>=0&&j<arraylist.size() : "Second index is invalid";
+    T help=arraylist.get(i);
+    arraylist.set(i,arraylist.get(j));
+    arraylist.set(j,help);
   }
   
   static int fib ( int n )

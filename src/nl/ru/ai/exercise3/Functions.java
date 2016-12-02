@@ -1,14 +1,19 @@
 package nl.ru.ai.exercise3;
 
+/**
+ * @author Denise van Baalen (s4708237)
+ * @author Anna Gansen (s4753755)
+ */
+
 public class Functions {
 	
 	public static void main(String[] args)
 	  {
 		int[] a = {2,4,5,1};
-		System.out.println(sum(4));
-		System.out.println(power(2,4));
-		System.out.println(minimum(a,4));
-		System.out.println(gcd(7,2));
+		System.out.println("Sum of 4: " + sum(4));
+		System.out.println("2 to the power of 4: " + power(2,4));
+		System.out.println("Minimum element of a up to the 4th element: " + minimum(a,4));
+		System.out.println("Greatest Common Divisor of 100 and 110: " + gcd(100,110));
 	  }
 	
 	/**
@@ -52,9 +57,15 @@ public class Functions {
 		else
 			return Math.min(a[n-1],minimum(a,n-1));
 	}
-	
+	/**
+	 * Return greatest common divisor
+	 * @param n
+	 * @param m
+	 * @return gcd
+	 */
 	private static int gcd (int n,int m) 
 	{
+		assert n>0 && m>=0: "Invalid value";
 		if(m==0)
 			return n;
 		if (n<m)
