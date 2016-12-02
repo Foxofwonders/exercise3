@@ -12,46 +12,47 @@ public class Exercise3
 
   public static void main(String[] args)
   {
-    /*
-     * Create an ArrayList of names
-     */
-    ArrayList<String> names=new ArrayList<String>();
-    names.add("Sparky");
-    names.add("Nino");
-    names.add("Djamari");
-    names.add("Eireen");
-    names.add("Joan");
-    names.add("Haye");
-    names.add("Haye");
-    /*
-     * Print them (unsorted)
-     */
-    System.out.println("Unsorted: "+names);
-    /*
-     * Sort them
-     */
-    selectionSort(names,0);
-    /*
-     * Print them (sorted)
-     */
-    System.out.println("Sorted: "+names);
+//    /*
+//     * Create an ArrayList of names
+//     */
+//    ArrayList<String> names=new ArrayList<String>();
+//    names.add("Sparky");
+//    names.add("Nino");
+//    names.add("Djamari");
+//    names.add("Eireen");
+//    names.add("Joan");
+//    names.add("Haye");
+//    names.add("Haye");
+//    /*
+//     * Print them (unsorted)
+//     */
+//    System.out.println("Unsorted: "+names);
+//    /*
+//     * Sort them
+//     */
+//    selectionSort(names,0);
+//    /*
+//     * Print them (sorted)
+//     */
+//    System.out.println("Sorted: "+names);
     printFibs(1000);
   }
   
-  static int fib (int n)
+  static int fib (int n, int[]memo)
   {
-	  int[] memo = new int [1000];
-	  memo[0]=1;
-	  memo[1]=1;
-	  
 	  if ( n == 0 || n == 1 )
 		  return 1 ;
 	  else
 	  {
 		  if(memo[n-1]!=0 && memo[n-2]!=0)
 			  return memo[n-1] + memo[n-2];
+		  else if(memo[n-2]!=0)
+			  {
+				  memo[n-1]=memo[n-2]+memo[n-3];
+				  return fib (n-1, memo) + fib (n-2, memo);
+			  }
 		  else
-			  return fib (n-1) + fib (n-2);
+			  return fib (n-1, memo) + fib (n-2, memo);
 	  }
 	  
   } 
@@ -66,10 +67,14 @@ public class Exercise3
 //	  int [] memo = new int[times];
 //	  memo[0]=1;
 //	  memo[1]=1;
+	  
+	  int[] memo = new int [times];
+	  memo[0]=1;
+	  memo[1]=1;
 		  
-	  for(int i=0; i<times; i++)
+	  for(int i=0; i<=times; i++)
 	  {
-		  System.out.println("n " + i + "=" + fib(i));
+		  System.out.println("n " + i + "=" + fib(i, memo));
 	  }
   }
 
