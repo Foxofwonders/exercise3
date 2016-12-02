@@ -35,7 +35,7 @@ public class Exercise3
 //     * Print them (sorted)
 //     */
 //    System.out.println("Sorted: "+names);
-    printFibs(1000);
+    printFibs(45);
   }
   
   static int fib (int n, int[]memo)
@@ -45,14 +45,18 @@ public class Exercise3
 	  else
 	  {
 		  if(memo[n-1]!=0 && memo[n-2]!=0)
+		  {
 			  return memo[n-1] + memo[n-2];
+		  }
 		  else if(memo[n-2]!=0)
-			  {
-				  memo[n-1]=memo[n-2]+memo[n-3];
-				  return fib (n-1, memo) + fib (n-2, memo);
-			  }
-		  else
+		  {
+			  memo[n-1]=memo[n-2]+memo[n-3];
 			  return fib (n-1, memo) + fib (n-2, memo);
+		  }
+		  else
+		  {
+			  return fib (n-1, memo) + fib (n-2, memo);
+		  }
 	  }
 	  
   } 
