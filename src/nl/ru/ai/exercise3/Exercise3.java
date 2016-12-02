@@ -68,10 +68,6 @@ public class Exercise3
   {
 	  assert times>0: "Please choose a positive number of times to print fibonacci numbers.";
 	  
-//	  int [] memo = new int[times];
-//	  memo[0]=1;
-//	  memo[1]=1;
-	  
 	  int[] memo = new int [times];
 	  memo[0]=1;
 	  memo[1]=1;
