@@ -35,7 +35,26 @@ public class Exercise3
      * Print them (sorted)
      */
     System.out.println("Sorted: "+names);
+    printFibs(1000);
   }
+  
+  static int fib (int n)
+  {
+	  int[] memo = new int [1000];
+	  memo[0]=1;
+	  memo[1]=1;
+	  
+	  if ( n == 0 || n == 1 )
+		  return 1 ;
+	  else
+	  {
+		  if(memo[n-1]!=0 && memo[n-2]!=0)
+			  return memo[n-1] + memo[n-2];
+		  else
+			  return fib (n-1) + fib (n-2);
+	  }
+	  
+  } 
 
   /*
    * Prints the first 42 (43) numbers of the fibonacci sequence very quickly, but slows down significantly after that.
@@ -44,9 +63,13 @@ public class Exercise3
   {
 	  assert times>0: "Please choose a positive number of times to print fibonacci numbers.";
 	  
+//	  int [] memo = new int[times];
+//	  memo[0]=1;
+//	  memo[1]=1;
+		  
 	  for(int i=0; i<times; i++)
 	  {
-		  System.out.println("n" + i + "=" + fib(i));
+		  System.out.println("n " + i + "=" + fib(i));
 	  }
   }
 
@@ -109,12 +132,4 @@ public class Exercise3
     arraylist.set(i,arraylist.get(j));
     arraylist.set(j,help);
   }
-  
-  static int fib ( int n )
-  {
-	  if ( n == 0 || n == 1 )
-		  return 1 ;
-		  else
-		  return fib (n-1) + fib (n-2);
-  } 
 }
