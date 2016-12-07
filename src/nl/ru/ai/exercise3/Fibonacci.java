@@ -11,17 +11,27 @@ public class Fibonacci
 {
 	public static void main(String[] args)
 	  {
-
 		Scanner sc = new Scanner(System.in);
+		boolean stop=false;
+		while(!stop)
+		{
 		System.out.println("Which Function do you want to use?");
 		System.out.println("(0) Regular Fib-Function");
 		System.out.println("(1) Improved Fib-Function with Memory-Array");
 		System.out.println("(2) Efficient Fib-Function with O(1) Space Complexity");
+		System.out.println("(3) Stop");
 		System.out.println("");
-		System.out.println("Insert 0,1 or 2 and the n'th position up to which you want to know the sequence.");
+		System.out.println("Insert 0,1,2 or 3 and the n'th position up to which you want to know the sequence.");
 		int choice = sc.nextInt();
 		int n = sc.nextInt();
+		if(choice==3)
+		{
+			stop=true;
+		}else
+		{
 		printFibs(choice,n);
+		}
+		}
 		sc.close();
 
 	  }
